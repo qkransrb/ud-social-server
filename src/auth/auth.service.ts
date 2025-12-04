@@ -17,6 +17,12 @@ export class AuthService {
   ) {}
 
   async signUp(signUpDto: SignUpDto) {
+    const exist = await this.userModel.findOne({ email: signUpDto.email });
+
+    if (exist) {
+      throw new BadRequestException('Email already in use');
+    }
+
     const SALT_ROUNDS = 10;
     const hashedPassword = await bcrypt.hash(signUpDto.password, SALT_ROUNDS);
 
