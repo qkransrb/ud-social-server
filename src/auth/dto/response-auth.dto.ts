@@ -6,4 +6,7 @@ export class ResponseAuthDto {
 
   @Expose()
   email: string;
+
+  @Expose()
+  role: string;
 }
